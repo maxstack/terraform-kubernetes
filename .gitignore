@@ -1,0 +1,4 @@
+secrets.tf
+your_ip.tf
+terraform.*
+.terraform
