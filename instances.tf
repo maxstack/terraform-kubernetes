@@ -21,10 +21,12 @@ resource "aws_instance" "kube_master" {
 
 }
 
-resource "aws_instance" "kube_slave1" {
+resource "aws_instance" "kube_slave" {
   connection {
     user = "ec2-user"
   }
+
+  count = 2
 
   instance_type = "t2.small"
 
@@ -37,32 +39,7 @@ resource "aws_instance" "kube_slave1" {
   subnet_id = "${aws_subnet.default.id}"
 
   tags {
-    Name = "${var.instance_name_slave1}"
-  }
-
-  user_data = "${data.template_cloudinit_config.config_slave.rendered}"
-
-}
-
-resource "aws_instance" "kube_slave2" {
-  connection {
-    user = "ec2-user"
-  }
-
-  instance_type = "t2.small"
-
-  ami = "${lookup(var.aws_amis, var.aws_region)}"
-
-  key_name = "${aws_key_pair.auth.id}"
-
-  vpc_security_group_ids = ["${aws_security_group.default.id}"]
-
-  subnet_id = "${aws_subnet.default.id}"
-
-  tags {
-    Name = "${var.instance_name_slave2}"
-    owner = "${var.owner}"
-    chargeto = "${var.chargeto}"
+    Name = "${var.instance_name_slave}"
   }
 
   user_data = "${data.template_cloudinit_config.config_slave.rendered}"

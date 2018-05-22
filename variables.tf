@@ -16,12 +16,8 @@ variable "instance_name_master" {
   default     = "kube_master_eval"
 }
 
-variable "instance_name_slave1" {
-  default     = "kube_slave1_eval"
-}
-
-variable "instance_name_slave2" {
-  default     = "kube_slave2_eval"
+variable "instance_name_slave" {
+  default     = "kube_slave_eval"
 }
 
 variable "owner" {
